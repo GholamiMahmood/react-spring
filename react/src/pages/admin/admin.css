@@ -1,0 +1,17 @@
+.button_modifie{
+    background-color: rgba(71, 71, 211, 0.884);
+    border-style: solid;
+    border-radius: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    padding: 10px 25px;
+    
+}
+.button_supprim{
+    background-color: red;
+    border-style: solid;
+    border-radius: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    padding: 10px 20px;
+}

@@ -1,0 +1,26 @@
+.button_taille{
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #0b62be;
+    color: #fff;
+    font-size: 16px;
+    float: right;
+    text-align: center;
+}
+
+
+.aligement{
+    text-align: center; 
+    padding-top: 8px; 
+}
+
+.txt_taille{
+   
+    font-size: 16px;
+    float: right;
+    text-align: center;
+    padding-right: 4px;
+
+}
