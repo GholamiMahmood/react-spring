@@ -11,8 +11,10 @@ import java.util.List;
 public interface PurchaseRepository extends JpaRepository<Achats, Long>
 {
     @Query("select " +
-            "prd.name as name, pur.price as price, pur.purchaseTime as purchaseTime " +
+            "prd.name as name, prd.type as type, pur.price as price, pur.purchaseTime as purchaseTime " +
             "from Achats pur left join Produit prd on prd.id = pur.productId " +
             "where pur.userId = :userId")
+
+
     List<PurchaseItem> findAllPurchasesOfUser(@Param("userId") Long userId);
 }

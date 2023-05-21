@@ -2,6 +2,8 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import Product from '../models/product';
 import ProductService from '../services/product.service';
 import { Modal } from 'react-bootstrap';
+import {ComboBox, Item, Section} from '@adobe/react-spectrum';
+
 
 
 const ProductSave = forwardRef((props, ref) => {
@@ -52,6 +54,7 @@ const ProductSave = forwardRef((props, ref) => {
           return {
               ...prevState,
               [name]: value
+              
           };
       }));
     };
@@ -88,6 +91,27 @@ const ProductSave = forwardRef((props, ref) => {
                         />
                         <div className="invalid-feedback">
                             Name is required.
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Catégorie: </label>
+                      <div>    
+                        <select
+                                className="combo-box"
+                                value={product.type}
+                                name="type"
+                                onChange={(e) => handleChange(e)}
+                                required
+                            >
+                                <option value="">Sélectionnez une option</option>
+                                <option value="Vélo hybride">Vélo hybride</option>
+                                <option value="Vélo de route">Vélo de route</option>
+                                <option value="Vélo cruiser">Vélo cruiser</option>
+                                <option value="Vélo électrique">Vélo électrique</option>
+                        </select>
+                        </div>   
+                        <div className="invalid-feedback">
+                            Type is required.
                         </div>
                     </div>
                     <div className="form-group">

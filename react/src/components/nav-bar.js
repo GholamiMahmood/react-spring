@@ -1,4 +1,3 @@
-
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCurrentUser } from '../store/actions/user';
@@ -6,6 +5,8 @@ import { Role } from '../models/role';
 import './nav-bar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
+import { MyDropdown } from './selectionner';
+
 
 
 const NavBar = () => {
@@ -40,11 +41,15 @@ const NavBar = () => {
                       Page D'accueil
                     </NavLink>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <NavLink to="/achats" className="nav-link">
                         Achats
                     </NavLink>
+                </li> */}
+                <li className="nav-item">                    
+                    <MyDropdown/>
                 </li>
+               
             </div>
             
 

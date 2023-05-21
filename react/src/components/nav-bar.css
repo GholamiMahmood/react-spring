@@ -1,8 +1,11 @@
 .bg-blue {
-    background-color: rgba(119, 139, 231, 0.705);
+    background-color: rgb(196, 196, 226);
     
   }
   .logo{
     padding-right: 30px;
   }
- 
+  .dropdown{
+    cursor:pointer;
+  }
+

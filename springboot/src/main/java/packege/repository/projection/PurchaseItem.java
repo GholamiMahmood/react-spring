@@ -11,6 +11,7 @@ public interface PurchaseItem
 {
     String getName();
     Double getPrice();
+    String getType();
     LocalDateTime getPurchaseTime();
 
 }

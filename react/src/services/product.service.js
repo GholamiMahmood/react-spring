@@ -8,6 +8,7 @@ const API_URL = BASE_API_URL + '/api/product';
 class ProductService {
 
     saveProduct(product) {
+        
         return axios.post(API_URL, product, {headers: authHeader()});
     }
 

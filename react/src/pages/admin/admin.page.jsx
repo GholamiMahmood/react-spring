@@ -128,7 +128,7 @@ const AdminPage = () => {
                         }}  />
                        <Column field="name" header="Nome" sortable/>
                        <Column field="price" header="Prix" sortable/>
-                       <Column  field={productList => new Date(productList.createTime).toLocaleDateString()} header="Date" sortable/>
+                       <Column  field={productList => new Date(productList.createTime).toLocaleDateString()} header="Date" />
                        <Column
                             field={(rowData) => (
                             <button class="button_modifie" onClick={() => editProductRequest(rowData)}>modifie</button>
@@ -143,15 +143,7 @@ const AdminPage = () => {
                         />
                                 
             </Datatable>
-
-
-
-
-
-
-
-
-                        {/* ************************** */}
+                        
                     </div>
 
                 </div>

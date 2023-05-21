@@ -64,7 +64,7 @@ const ProfilePage = () => {
                                 }}>cliquez ici                                 
                             </button>                        
                         </div>
-                        <div class="txt_taille">changement de rôle,<br/>juste pour l'admin</div>
+                        <div class="txt_taille">changement de rôle<br/>juste pour l'admin</div>
                 
             <InputText
               onInput={ (e) =>
@@ -80,13 +80,18 @@ const ProfilePage = () => {
             rowsPerPageOptions={[1,2,3,4,5]}
             
             >
-                <Column header="N" body={(rowData) => {
+                <Column header="Ligne"
+                body={(rowData) => {
                     const index = purchaseList.indexOf(rowData);
                     return <span>{index + rowNum}</span>
-                }}  />
+                }} 
+                 />
+             
                 <Column field="name" header="Nome" sortable/>
                 <Column field="price" header="Prix" sortable/>
+                <Column field="type" header="Type" sortable/>
                 <Column header="Date" body={(item) => new Date(item.purchaseTime).toLocaleDateString()}  sortable/>
+                
             </Datatable>
 
         </div>

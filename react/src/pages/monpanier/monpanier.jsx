@@ -3,11 +3,12 @@ import ProductService from '../../services/product.service';
 import PurchaseService from '../../services/purchase.service';
 import { useSelector } from 'react-redux';
 import Purchase from '../../models/purchase';
-import './achats.css';
+import './monpanier.css';
 
 
 
-const Achats = () => {
+
+const MonPanier = () => {
 
     const [productList, setProductList] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
@@ -30,7 +31,10 @@ const Achats = () => {
         const purchase = new Purchase(currentUser.id, product.id, product.price);
 
         PurchaseService.savePurchase(purchase).then(() => {
-            setInfoMessage("c'est fait.");
+            setInfoMessage("Votre achat est réussi.");
+            setTimeout(() => {
+                setInfoMessage(null);
+              }, 3000);
         }).catch((err) => {
             setErrorMessage("Une erreur inattendue s'est produite.");
             console.log(err);
@@ -41,8 +45,7 @@ const Achats = () => {
     return (
         <div>
             <div class="titre"><h2 class="text-center">Liste des produits</h2></div>
-            <div class="containerDePage">                     
-                    
+            <div class="containerDePage">            
                                                                                             
                                 {errorMessage &&
                                 <div className="alert alert-danger">
@@ -66,9 +69,8 @@ const Achats = () => {
                                                 <div>                                                
                                                 <img src={item.image} class="velo"/>
                                                 </div>
-                                                <div>                                                
-                                                <div>{item.description} </div>
-                                                </div>
+                                                <div>{item.type} </div>
+                                                
                                             </div>                                            
                                            
                                             <div class="taille" >
@@ -91,4 +93,4 @@ const Achats = () => {
     );
 };
 
-export {Achats};
+export {MonPanier};

@@ -21,6 +21,10 @@ public class Produit
     @Column(name = "image", nullable = false)
     private String image;
 
+    @Column(name = "type", nullable = false)
+    private String type;
+
+
     @Column(name = "description", nullable = false)
     private String description;
 

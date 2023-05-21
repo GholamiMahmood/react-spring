@@ -5,7 +5,7 @@ import { PageDaccueil } from './pages/accueil/accueil';
 import { Connection } from './pages/connection';
 import { RegisterPage } from './pages/register/register.page';
 import { ProfilePage } from './pages/profile/profile';
-import { Achats } from './pages/achats/achats';
+import { MonPanier } from './pages/monpanier/monpanier';
 import { AdminPage } from './pages/admin/admin.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { UnauthorizedPage } from './pages/unauthorized/unauthorized.page';
@@ -22,8 +22,7 @@ function App() {
                   <Route path="/accueil" element={<PageDaccueil/>}/>
                   <Route path="/connection" element={<Connection/>}/>
                   <Route path="/register" element={<RegisterPage/>}/>
-                  <Route path="/achats" element={<Achats/>}/>
-
+                  <Route path="/monpanier" element={<MonPanier/>}/>
                   <Route path="/profile" element={
                       <AuthGuard roles={[Role.ADMIN, Role.USER]}>
                           <ProfilePage/>
