@@ -4,7 +4,7 @@ import { clearCurrentUser } from '../store/actions/user';
 import { Role } from '../models/role';
 import './nav-bar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBicycle } from '@fortawesome/free-solid-svg-icons';
+import { faBicycle , faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import { MyDropdown } from './selectionner';
 
 
@@ -41,11 +41,6 @@ const NavBar = () => {
                       Page D'accueil
                     </NavLink>
                 </li>
-                {/* <li className="nav-item">
-                    <NavLink to="/achats" className="nav-link">
-                        Achats
-                    </NavLink>
-                </li> */}
                 <li className="nav-item">                    
                     <MyDropdown/>
                 </li>
@@ -55,7 +50,7 @@ const NavBar = () => {
 
             {!currentUser &&
             <div className="navbar-nav ms-auto">
-               
+                             
                 <li className="nav-item">
                     <NavLink to="/register" className="nav-link">
                         Sign Up
@@ -64,6 +59,11 @@ const NavBar = () => {
                 <li className="nav-item">
                     <NavLink to="/connection" className="nav-link">
                         Sign In
+                    </NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink to="/cart" className="nav-link">
+                    <FontAwesomeIcon icon={faShoppingCart} size="2x" style={{ color: "black" }}/>
                     </NavLink>
                 </li>
             </div>
@@ -80,7 +80,12 @@ const NavBar = () => {
                     <a href="#" className="nav-link" onClick={() => logout()}>
                         Sign Out
                     </a>
+                </li> <li className="nav-item">
+                    <NavLink to="/cart" className="nav-link">
+                    <FontAwesomeIcon icon={faShoppingCart} size="2x" style={{ color: "black" }}/>
+                    </NavLink>
                 </li>
+
             </div>
             }
 

@@ -5,7 +5,7 @@ import './nav-bar.css';
 const MyDropdown = () => {
   const options = [    
     { value: 'option1', label: 'Categorie', path: '/accueil'  },
-    { value: 'option2', label: 'MonPanier' , path: '/monpanier' }
+    { value: 'option2', label: 'MonPanier' , path: '/monpanier'  }
   ];
   const colorStyles = {
     control: (styles, { isFocused, isHovered }) => ({

@@ -30,52 +30,33 @@ public class JwtProviderImpl implements JwtProvider
     @Value("${app.jwt.expiration-in-ms}")
     private Long JWT_EXPIRATION_IN_MS;
 
-    @Override
-    public String generateToken(UserPrinciple auth)
-    {
-        String authorities = auth.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-
-        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
-
+    public String generateToken(UserPrinciple auth) {
         return Jwts.builder()
                 .setSubject(auth.getUsername())
-                .claim("roles", authorities)
+                .claim("roles", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(",")))
                 .claim("userId", auth.getId())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_IN_MS))
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(Keys.hmacShaKeyFor(JWT_SECRET.getBytes()), SignatureAlgorithm.HS512)
                 .compact();
     }
 
     @Override
-    public Authentication getAuthentication(HttpServletRequest request)
-    {
+    public Authentication getAuthentication(HttpServletRequest request) {
         Claims claims = extractClaims(request);
-
-        if (claims == null)
-        {
-            return null;
-        }
+        if (claims == null || claims.getSubject() == null) return null;
 
         String username = claims.getSubject();
         Long userId = claims.get("userId", Long.class);
 
-        Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
+        Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles", String.class).split(","))
                 .map(SecurityUtils::convertToAuthority)
                 .collect(Collectors.toSet());
 
-        UserDetails userDetails = UserPrinciple.builder()
-                .username(username)
-                .authorities(authorities)
-                .id(userId)
-                .build();
-
-        if (username == null)
-        {
-            return null;
-        }
-        return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+        return new UsernamePasswordAuthenticationToken(
+                UserPrinciple.builder().username(username).authorities(authorities).id(userId).build(),
+                null,
+                authorities
+        );
     }
 
     @Override
@@ -83,26 +64,17 @@ public class JwtProviderImpl implements JwtProvider
     {
         Claims claims = extractClaims(request);
 
-        if (claims == null)
-        {
-            return false;
-        }
+        if (claims == null){ return false; }
 
-        if (claims.getExpiration().before(new Date()))
-        {
-            return false;
-        }
+        if (claims.getExpiration().before(new Date())) { return false; }
+
         return true;
     }
 
     private Claims extractClaims(HttpServletRequest request)
     {
         String token = SecurityUtils.extractAuthTokenFromRequest(request);
-
-        if (token == null)
-        {
-            return null;
-        }
+        if (token == null){ return null; }
 
         Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
 

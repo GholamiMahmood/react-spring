@@ -19,8 +19,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     private JwtProvider jwtProvider;
 
     @Override
-    public Utilisateur signInAndReturnJWT(Utilisateur signInRequest)
-    {
+    public Utilisateur signInAndReturnJWT(Utilisateur signInRequest){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), signInRequest.getPassword())
         );
@@ -33,4 +32,5 @@ public class AuthenticationServiceImpl implements AuthenticationService
 
         return signInUtilisateur;
     }
+
 }
