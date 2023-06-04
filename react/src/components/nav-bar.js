@@ -9,7 +9,7 @@ import { MyDropdown } from './selectionner';
 
 
 
-const NavBar = () => {
+const NavBar = ({cartItems}) => {
 
     const currentUser = useSelector(state => state.user);
     
@@ -42,7 +42,7 @@ const NavBar = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item">                    
-                    <MyDropdown/>
+                    <MyDropdown />
                 </li>
                
             </div>
@@ -64,6 +64,7 @@ const NavBar = () => {
                 <li className="nav-item">
                     <NavLink to="/cart" className="nav-link">
                     <FontAwesomeIcon icon={faShoppingCart} size="2x" style={{ color: "black" }}/>
+                   
                     </NavLink>
                 </li>
             </div>
@@ -83,6 +84,7 @@ const NavBar = () => {
                 </li> <li className="nav-item">
                     <NavLink to="/cart" className="nav-link">
                     <FontAwesomeIcon icon={faShoppingCart} size="2x" style={{ color: "black" }}/>
+                    <span className="cart-length"> {cartItems.length === 0? "": cartItems.length} </span>
                     </NavLink>
                 </li>
 

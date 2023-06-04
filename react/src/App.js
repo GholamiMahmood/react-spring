@@ -12,13 +12,13 @@ import { NotFoundPage } from './pages/not-found/not-found.page';
 import { UnauthorizedPage } from './pages/unauthorized/unauthorized.page';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/role';
+import { Categorie } from './pages/categorie';
 
-// 
+ 
 import PurchaseService from './services/purchase.service';
 import Purchase from './models/purchase';
 import { useSelector } from 'react-redux';
 import  { useState, useEffect } from 'react';
-import { Rout } from "./components/routes";
 import ProductService from './services/product.service';
 
 
@@ -37,8 +37,16 @@ function App() {
     const [infoMessage, setInfoMessage] = useState('');
     
     const[cartItems, setCartItems] = useState([]);
-
+    
+    // utilisateur current paut sauvgarde les items, mais doit etre signin, sinon il doit arreter 
+    const currentUser = useSelector(state => state.user);
     const handelAddProduct = (product) => {
+          if (!currentUser?.id) {            
+             alert ("Vous devez vous connecter pour acheter un produit."); 
+             
+            return;
+           }
+
         return new Promise((resolve, reject) => {
           const productExist = cartItems.find((item) => item.id === product.id);
           if (productExist) {
@@ -69,14 +77,23 @@ function App() {
                 );            
          }
     }
-    
-    // utilisateur current paut sauvgarde les items, mais doit etre signin
-    const currentUser = useSelector(state => state.user);
-    const purchase = (products) => {
-        if (!currentUser?.id) {
-            setErrorMessage('Vous devez vous connecter pour acheter un produit.');
-            return;
-        }
+    // 
+    function tempAlert(msg,duration){
+      var el = document.createElement("div");
+      el.setAttribute("style","margin-left: 450px;;height:10%;width:35%;font-color:white;background-color:#90EE90;text-align: center;");
+      el.innerHTML = msg;
+      setTimeout(function(){
+        el.parentNode.removeChild(el);
+      },duration);
+      document.body.appendChild(el);
+    }
+
+    const purchase = (products) => {  
+      if (!currentUser?.id) {            
+         alert ("Vous devez vous connecter pour acheter un produit."); 
+                       
+        return;
+       }    
         const purchasePromises = products.map((product) => {
             const purchase = new Purchase(currentUser.id, product.id, product.price);
             return PurchaseService.savePurchase(purchase);
@@ -84,10 +101,8 @@ function App() {
         
           Promise.all(purchasePromises)
             .then(() => {
-              setInfoMessage("Vos achats sont réussis.");
-              setTimeout(() => {
-                                setInfoMessage(null);
-                              }, 3000);
+              tempAlert("votre commande est enregistrée avec succès",3000) 
+              
             })
             .catch((err) => {
               setErrorMessage("Une erreur inattendue s'est produite.");
@@ -102,7 +117,7 @@ function App() {
 
   return (
       <BrowserRouter>
-          <NavBar/>
+          <NavBar cartItems={cartItems}/>
           
           <div className="container">
               <Routes>
@@ -110,7 +125,7 @@ function App() {
                   <Route path="/accueil" element={<PageDaccueil/>}/>
                   <Route path="/connection" element={<Connection/>}/>
                   <Route path="/register" element={<RegisterPage/>}/>                  
-                  {/* <Route path="/routes" element={<Rout productItems={productItems} handelAddProduct={handelAddProduct} />}  /> */}
+                  <Route path="/categorie" element={<Categorie/>}/> 
                  
                  <Route path="/monpanier" element={<MonPanier productItems={productItems} handelAddProduct={handelAddProduct}/>}  />                     
                  <Route path="/cart" element={<Cart cartItems={cartItems} handelAddProduct={handelAddProduct} handelRemoveProduct={handelRemoveProduct} handelCartClearance={handelCartClearance} purchase={purchase}/>} />                 

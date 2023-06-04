@@ -97,10 +97,12 @@
 
 import {React} from 'react';
 import './panier.css';
-const MonPanier = ({ productItems, handelAddProduct }) => {    
+const MonPanier = ({ productItems, handelAddProduct }) => { 
+
     
     return (
         <div>
+        
             <div className="titre"><h2 className="text-center">Liste des produits</h2></div>
             <div className="containerDePage">
                                 <div className="d-flex flex-wrap">

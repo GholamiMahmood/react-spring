@@ -8,4 +8,9 @@
   .dropdown{
     cursor:pointer;
   }
+  .cart-length{
+    color: red;
+    font-size: large;
+    font-weight: bold;
+  }
 
