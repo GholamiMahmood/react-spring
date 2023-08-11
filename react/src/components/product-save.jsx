@@ -125,7 +125,7 @@ const ProductSave = forwardRef((props, ref) => {
                             required
                         />
                         <div className="invalid-feedback">
-                            Image is required.
+                        L'image est requise.
                         </div>
                     </div>
 

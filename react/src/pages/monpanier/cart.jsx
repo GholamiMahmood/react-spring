@@ -8,13 +8,13 @@ const Cart=({cartItems, handelAddProduct,handelRemoveProduct ,handelCartClearanc
     );
     return(
     <div className="cart-items">
-        <div className="cart-items-header">Cart items </div>
+        <div className="cart-items-header">Articles du panier </div>
         <div className="clear-cart">
                {cartItems.length >=1 && (
-                 <button className="clear-cart-button" onClick={handelCartClearance}>Clear Cart</button>
+                 <button className="clear-cart-button" onClick={handelCartClearance}>Vider le panier</button>
                )}
         </div>
-        {cartItems.length === 0 && (<div className='cart-item-empty'> No items are added.</div>)}
+        {cartItems.length === 0 && (<div className='cart-item-empty'> Aucun élément n'est pas ajouté.</div>)}
          <div>
             {cartItems.map((item) =>                                        
                     <div key={item.id} className="cart-items-list" >                                                                        
@@ -30,7 +30,7 @@ const Cart=({cartItems, handelAddProduct,handelRemoveProduct ,handelCartClearanc
             )}
         </div>
         <div className="cart-items-total-price-name"> 
-           Total price
+           Prix Total
            <div className="cart-items-total-price"> ${totalPrice}</div>
         </div>
         <div>

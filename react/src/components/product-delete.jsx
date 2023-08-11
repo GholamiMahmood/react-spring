@@ -32,8 +32,8 @@ const ProductDelete = forwardRef((props, ref) => {
             </div>
 
             <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShow(false)}>Cancel</button>
-                <button type="button" className="btn btn-danger" onClick={() => deleteProduct()}>I'm sure!</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setShow(false)}>Annulation</button>
+                <button type="button" className="btn btn-danger" onClick={() => deleteProduct()}>Je suis sûr!</button>
             </div>
 
         </Modal>

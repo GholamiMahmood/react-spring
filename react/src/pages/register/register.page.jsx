@@ -138,7 +138,7 @@ const RegisterPage = () => {
                 </form>
 
                 <Link to="/connection" className="btn btn-link" style={{color: 'darkgray'}}>
-                    I have an Account!
+                    j ai un compte! 
                 </Link>
 
             </div>

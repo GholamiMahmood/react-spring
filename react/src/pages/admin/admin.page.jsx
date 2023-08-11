@@ -72,7 +72,7 @@ const AdminPage = () => {
           setProductList(productList.filter(x => x.id !== selectedProduct.id));
 
       }).catch(err => {
-          setErrorMessage('Unexpected error occurred.');
+          setErrorMessage('le vélo a été vendu, les informations doivent donc être conservées dans la base de données');
           console.log("TEST", err);
       });
     };

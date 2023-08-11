@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SimpleImageSlider from "react-simple-image-slider";
 
 const Slides = () => {  
-const [imageNum, setImageNum] = useState(1);
+   const [imageNum, setImageNum] = useState(1);
    const sliderImages = [
       // {
       //    url: "images/velo1.jpg",
